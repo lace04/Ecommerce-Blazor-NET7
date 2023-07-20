@@ -8,6 +8,7 @@ using Ecommerce.utilidades;
 
 using Ecommerce.Servicio.Contrato;
 using Ecommerce.Servicio.Implementacion;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,14 @@ builder.Services.AddTransient<IProductoServicio, ProductoServicio>();
 builder.Services.AddTransient<IVentaServicio, VentaServicio>();
 builder.Services.AddTransient<IDashboardServicio, DashboardServicio>();
 
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("CorsPolicy",
+       app => app.AllowAnyOrigin()
+       .AllowAnyMethod()
+       .AllowAnyHeader());
+});
+
 
 var app = builder.Build();
 
@@ -44,6 +53,8 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 

@@ -98,8 +98,7 @@ namespace Ecommerce.Servicio.Implementacion
     {
       try
       {
-        var consulta = _modeloRepositorio.Consultar(p =>
-        string.Concat(p.Nombre.ToLower()).Contains(buscar.ToLower()));
+        var consulta = _modeloRepositorio.Consultar(p => p.Nombre.ToLower().Contains(buscar.ToLower()));
 
         List<CategoriaDTO> lista = _mapper.Map<List<CategoriaDTO>>(await consulta.ToListAsync());
         return lista;
@@ -109,6 +108,7 @@ namespace Ecommerce.Servicio.Implementacion
         throw ex;
       }
     }
+
 
     public async Task<CategoriaDTO> Obtener(int id)
     {
