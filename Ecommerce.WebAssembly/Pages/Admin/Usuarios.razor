@@ -67,6 +67,10 @@
     private async Task ObtenerUsuarios(string Valor = "")
     {
         var response = await usuarioServicio.Lista("Administrador", Valor);
+        if (response.Resultado!.Count == 0)
+        {
+            toastService.ShowInfo($"No se encontraron resultados: {buscar}");
+        }
         if (response.EsCorrecto)
         {
             lista = (List<UsuarioDTO>)response.Resultado!;
