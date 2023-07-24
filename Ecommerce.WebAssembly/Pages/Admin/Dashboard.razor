@@ -3,6 +3,7 @@
 @inject IDashboardServicio dashboardServicio
 @inject IToastService toastService
 @inject NavigationManager _navServicio
+@attribute [Authorize(Roles = "Administrador")];
 
 <div class="row mt-4">
 
